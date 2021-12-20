@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Whiteboard</title>
+
+    <link rel="shortcut icon" type="image/svg" href="./img/pencilwhite.svg" />
+
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Da+2:400,700&display=swap&subset=latin-ext" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav">
+        <div class="tools">
+          <div class="brush"></div>
+          <div class="eraser"></div>
+        </div>
+
+        <div class="controls">
+          <output for="paint-size-in" class="paint-size-out">2</output>
+          <input type="range" name="paint-size-in" id="paint-size-in" class="paint-size-in" min="1" max="100" value="2" />
+
+          <input type="color" name="color" class="color" id="color" />
+          <label for="color" class="color-label">
+            <div class="color-label-element" id="color-label"></div>
+          </label>
+        </div>
+
+        <a class="download" download="Whiteboard.png">
+          <div class="download-btn">
+            <div class="hide">Download image</div>
+          </div>
+        </a>
+      </div>
+    </nav>
+
+    <script src="script.js"></script>
+  </body>
+</html>
