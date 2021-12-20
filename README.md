@@ -6,8 +6,10 @@ This is rewritten (from JS to TypeScript) frontend of [whiteboard-v6](https://gi
 
 ## Used technologies
 
-- JS
-- TS
+- JavaScript (ES6)
+- TypeScript
+- HTML
+- CSS
 
 ## Short description
 
