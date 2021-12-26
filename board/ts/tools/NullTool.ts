@@ -3,6 +3,7 @@ import { Canvas } from "../canvas/Canvas";
 import { Tool } from "./Tool";
 
 class NullTool extends Tool {
+    protected static _toolName = "none";
     private static _instance: NullTool;
 
     private constructor() {

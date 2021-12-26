@@ -11,8 +11,9 @@ import { Properties } from "./util/Properties";
 class Drawing {
     private static _instance: Drawing;
 
-    public static get Instance() {
-        return this._instance || (this._instance = new this());
+    public static setup() {
+        if (!this._instance)
+            this._instance = new this()
     }
 
     private canvas: Canvas;
@@ -27,42 +28,38 @@ class Drawing {
     }
 
     private appendListeners() {
-        window.addEventListener(
-            "pointerdown",
-            e => {
-                if (Control.isControlElem(<HTMLElement>e.target)) return;//returns if element is control elem (tool, color picker etc.)
+        window.addEventListener("pointerdown", this.onStartDraw, false);
+        window.addEventListener("pointerup", this.onEndDraw, false);
+    }
 
-                this.tool = this.chooseTool(BoardStorage.get("tool"), Properties.local);
-                this.tool.startDraw(Mouse.getPosition(e));
+    private onStartDraw = (e: PointerEvent) => {
+        if (Control.isControlElem(<HTMLElement>e.target)) return;//returns if element is control elem (tool, color picker etc.)
 
-                window.addEventListener("pointermove", this.draw, false);
-            },
-            false
-        );
+        this.tool = this.chooseTool(BoardStorage.get("tool"), Properties.local);
+        this.tool.startDraw(Mouse.getPosition(e));
 
-        window.addEventListener(
-            "pointerup",
-            () => {
-                window.removeEventListener("pointermove", this.draw, false);
-                this.tool.endDraw();
-                this.tool = NullTool.Instance;
-            },
-            false
-        );
+        window.addEventListener("pointermove", this.onDraw, false);
+    }
+
+    private onDraw = (e: PointerEvent) => this.tool.addPoint(Mouse.getPosition(e));
+
+    private onEndDraw = () => {
+        window.removeEventListener("pointermove", this.onDraw, false);
+        this.tool.endDraw();
+        this.tool = NullTool.Instance;
     }
 
     chooseTool(toolName: String, properties: Properties): Tool {
         switch (toolName) {
-            case "brush":
+            case Brush.toolName:
                 return new Brush(this.canvas, properties);
-            case "eraser":
+            case Eraser.toolName:
                 return new Eraser(this.canvas, properties);
             default:
                 return NullTool.Instance;
         }
     }
 
-    private draw = (e: PointerEvent) => this.tool.addPoint(Mouse.getPosition(e));
 }
 
 export { Drawing }

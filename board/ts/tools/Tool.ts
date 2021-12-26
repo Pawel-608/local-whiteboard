@@ -4,9 +4,14 @@ import { Canvas } from "../canvas/Canvas";
 import { MainCanvas } from '../canvas/MainCanvas';
 
 abstract class Tool {
-    protected canvas;
+    protected static _toolName: String;
+    protected canvas: Canvas;
     protected properties: Properties;
     protected points: Point[];
+
+    public static get toolName() {
+        return this._toolName;
+    }
 
     constructor(canvas: Canvas, properties: Properties) {
         this.canvas = canvas;
