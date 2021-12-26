@@ -5,6 +5,10 @@ class MainCanvas extends Canvas {
 
     private static _instance: MainCanvas;
 
+    public static create(): void {
+        this.Instance;
+    }
+
     public static get Instance() {
         return this._instance || (this._instance = new this());
     }
@@ -16,6 +20,15 @@ class MainCanvas extends Canvas {
         this.sendToBack();
     }
 
+    private drawWhiteBackground() {
+        let prevFillStyle = this.ctx.fillStyle;
+        this.ctx.fillStyle = 'white';
+
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.ctx.fillStyle = prevFillStyle;
+    }
+
     private drawFromStorage() {
         let imgSrc = BoardStorage.get("img");
         if (!imgSrc) return;
@@ -24,17 +37,6 @@ class MainCanvas extends Canvas {
         img.src = imgSrc;
 
         img.addEventListener("load", () => this.ctx.drawImage(img, 0, 0));
-    }
-
-
-    private drawWhiteBackground() {
-        let prevFillStyle = this.ctx.fillStyle;
-        this.ctx.fillStyle = 'white';
-
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-
-        this.ctx.fillStyle = prevFillStyle;
     }
 
     private sendToBack() {

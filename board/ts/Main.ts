@@ -7,8 +7,8 @@ class Main {
     public static run(): void {
         this.setupConfig();
 
-        MainCanvas.Instance;
-        Drawing.Instance;
+        MainCanvas.create();
+        Drawing.setup();
 
     }
     public static setupConfig(): void {
