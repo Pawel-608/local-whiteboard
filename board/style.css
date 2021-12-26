@@ -101,7 +101,7 @@ input {
   -moz-appearance: none;
   appearance: none;
   top: 7em;
-  right: -0px;
+  right: 0px;
 }
 .color-label {
   display: grid;
