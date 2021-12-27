@@ -10,12 +10,12 @@ class Canvas {
         this._canvas.height = window.screen.availHeight;
         this._ctx = <CanvasRenderingContext2D>this._canvas.getContext("2d");
 
-        this.setProperties();
+        this.setup();
 
         document.body.appendChild(this._canvas);
     }
 
-    private setProperties() {
+    private setup() {
         this.ctx.lineJoin = <CanvasLineJoin>Config.lineJoin;
         this.ctx.lineCap = <CanvasLineCap>Config.lineCap;
     }
