@@ -1,5 +1,6 @@
 import { Canvas } from "./canvas/Canvas";
 import { Tool } from "./tools/Tool";
+import { NullTool } from './tools/NullTool'
 import { ToolFactory } from "./tools/ToolFactory";
 import { BoardStorage } from "./util/BoardStorage";
 import { Control } from "./util/Control";
@@ -15,7 +16,7 @@ class Drawing {
     }
 
     private canvas: Canvas;
-    private declare tool: Tool;
+    private tool: Tool = NullTool.Instance;
 
     private constructor() {
         this.canvas = new Canvas();
@@ -43,6 +44,8 @@ class Drawing {
     private endDraw = () => {
         window.removeEventListener("pointermove", this.draw, false);
         this.tool.endDraw();
+
+        this.tool = NullTool.Instance;
     }
 }
 

@@ -4,7 +4,7 @@ import { Canvas } from "../canvas/Canvas";
 import { MainCanvas } from '../canvas/MainCanvas';
 
 abstract class Tool {
-    protected static _toolName: String; //It shouldn't be this.constructor.name (class name) because it's js and can be minified
+    protected static _toolName: String; //It shouldn't be this.constructor.name (class name) because it's js and can be minified to some strange form
     protected canvas: Canvas;
     protected properties: Properties;
     protected points: Point[];
